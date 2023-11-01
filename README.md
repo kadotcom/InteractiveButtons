@@ -1,2 +1,2 @@
-# InteractiveButtons
-An EXILED plugin that adds interactive buttons by using items.
+# Exiled.Template
+An Exiled template which allows you to make plugins with installed structure
