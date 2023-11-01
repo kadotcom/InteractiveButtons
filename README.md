@@ -6,7 +6,8 @@ An EXILED plugin API that adds buttons by using items.
 2. Install the latest 'InteractiveButtons.dll' file.
 3. Once it installs, put the InteractiveButtons.dll file in the ```EXILED/Plugins``` folder
 4. Either start up your server if the server is offline, or restart your server if the server is online.
-
+5. Start using the InteractiveButtons API.
+   
 # API - Functions
 The InteractiveButtons plugin is an API to add buttons into SCP:SL by using items, and because of that, it has some functions needed to do certain things.
 
