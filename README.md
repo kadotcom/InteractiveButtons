@@ -11,9 +11,9 @@ An EXILED plugin API that adds buttons by using items.
 # API - Functions
 The InteractiveButtons plugin is an API to add buttons into SCP:SL by using items, and because of that, it has some functions needed to do certain things.
 
-To create a button, you use the ```API.Features.Spawn.CreateInteractiveButton``` function, it does have some values attached to it, which you can see in the [CreateInteractiveButton example](#createinteractivebutton-example).
+To create a button, you use the ```API.Features.Create.CreateInteractiveButton``` function, it does have some values attached to it, which you can see in the [CreateInteractiveButton example](#createinteractivebutton-example).
 
-While this is a button API, we also have a way to create a Pickup, simply use the ```API.Features.Spawn.CreatePickup``` function, just like the CreateInteractiveButton function, this also has some values attached to it, which you can see in the [CreatePickup example](#createpickup-example).
+While this is a button API, we also have a way to create a Pickup, simply use the ```API.Features.Create.CreatePickup``` function, just like the CreateInteractiveButton function, this also has some values attached to it, which you can see in the [CreatePickup example](#createpickup-example).
 
 # API - Events
 InteractiveButtons needs events to run properly.
