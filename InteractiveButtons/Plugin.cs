@@ -20,8 +20,8 @@ namespace InteractiveButtons
 
         public override string Prefix => Name;
 
-        public override Version Version => new Version(1,0,0,0);
-        public override Version RequiredExiledVersion => new Version(8,2,0,0);
+        public override Version Version => new Version(1,1,0);
+        public override Version RequiredExiledVersion => new Version(8,2,0);
         public static Plugin Instance;
 
         private EventHandlers _handlers;
@@ -33,6 +33,8 @@ namespace InteractiveButtons
             
             RegisterEvents();
 
+            API.API.Init();
+
             base.OnEnabled();
         }
 
@@ -40,6 +42,8 @@ namespace InteractiveButtons
         {
             UnregisterEvents();
 
+            API.API.Destroy();
+            
             Instance = null;
 
             base.OnDisabled();
@@ -50,11 +54,13 @@ namespace InteractiveButtons
             _handlers = new EventHandlers();
  
             Player.PickingUpItem += _handlers.OnInteracting;
+            Server.RestartingRound += _handlers.OnRoundRestarting;
         }
 
         private void UnregisterEvents()
         {
             Player.PickingUpItem -= _handlers.OnInteracting;
+            Server.RestartingRound -= _handlers.OnRoundRestarting;
 
             _handlers = null;
         }

@@ -367,8 +367,8 @@
     <Compile Include="API\Events\EventArgs\ButtonCreatedEventArgs.cs" />
     <Compile Include="API\Events\EventArgs\ButtonInteractedEventArgs.cs" />
     <Compile Include="API\Events\Handlers\Button.cs" />
-    <Compile Include="API\Features\Spawn.cs" />
-    <Compile Include="Commands\CreateAndSpawnItem.cs" />
+    <Compile Include="API\Features\Create.cs" />
+    <Compile Include="Commands\TestButton.cs" />
     <Compile Include="Component\InteractiveButton.cs" />
     <Compile Include="EventHandlers.cs" />
     <Compile Include="Plugin.cs" />

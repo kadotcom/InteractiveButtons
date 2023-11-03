@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace InteractiveButtons.API.Features
 {
-    public class Spawn
+    public class Create
     {
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, int Id, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, int Id, float PickupTime = 1f, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
             if(offset != null)
@@ -46,13 +46,19 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
+            
+
             p.GameObject.AddComponent<InteractiveButton>();
 
-            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
-            i.Button = p.GameObject;
-            i.HasIB = true;
-            i.ID = Id;
+            p.PickupTime = PickupTime;
 
+            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsUsingTextID = false;
+            i.ID = Id;
+            
+            API.ExistingButtons.Add(i);
             //API.ValidButtons.Add(p);
 
             if (Plugin.Instance.Config.Debug == true)
@@ -63,7 +69,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
 
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, int Id, Vector3 position, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, int Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
 
@@ -93,10 +99,14 @@ namespace InteractiveButtons.API.Features
 
             p.GameObject.AddComponent<InteractiveButton>();
 
+            p.PickupTime = PickupTime;
+
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
-            i.Button = p.GameObject;
-            i.HasIB = true;
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsUsingTextID = false;
             i.ID = Id;
+            API.ExistingButtons.Add(i);
 
             //API.ValidButtons.Add(p);
 
@@ -108,7 +118,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
 
-        public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, string Id, float PickupTime = 1f, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
             if (offset != null)
@@ -142,16 +152,122 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
+            p.GameObject.AddComponent<InteractiveButton>();
+
+            p.PickupTime = PickupTime;
+
+            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsUsingTextID = true;
+            i.TextID = Id;
+            API.ExistingButtons.Add(i);
+
+            //API.ValidButtons.Add(p);
+
+            if (Plugin.Instance.Config.Debug == true)
+                PluginAPI.Core.Log.Debug("DEBUGGING: ITEM: " + p.Type + " - POS: " + p.Position + " - ROOM: " + p.Room.Type + " - Interactive Button ID: " + i.ID);
+
+            Events.EventArgs.ButtonCreatedEventArgs ev = new Events.EventArgs.ButtonCreatedEventArgs(p.Base);
+            Events.Handlers.Button.OnButtonCreated(ev);
+            return p;
+        }
+
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, string Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
+        {
+            Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
+
+            p.Scale = scale ?? Vector3.one;
+
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = true;
+            }
+
+            p.GameObject.AddComponent<InteractiveButton>();
+
+            p.PickupTime = PickupTime;
+
+            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsUsingTextID = true;
+            i.TextID = Id;
+            API.ExistingButtons.Add(i);
+
+            //API.ValidButtons.Add(p);
+
+            if (Plugin.Instance.Config.Debug == true)
+                PluginAPI.Core.Log.Debug("DEBUGGING: ITEM: " + p.Type + " - POS: " + p.Position + " - ROOM: " + p.Room.Type + " - Interactive Button ID: " + i.ID);
+
+            Events.EventArgs.ButtonCreatedEventArgs ev = new Events.EventArgs.ButtonCreatedEventArgs(p.Base);
+            Events.Handlers.Button.OnButtonCreated(ev);
+            return p;
+        }
+
+        public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, bool HasGravity = true, float PickupTime = 1f, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        {
+            Vector3? off = null;
+            if (offset != null)
+            {
+                off = new Vector3(Room.Get(spawnRoom).Position.x + offset.Value.x, Room.Get(spawnRoom).Position.y + offset.Value.y, Room.Get(spawnRoom).Position.z + offset.Value.z);
+
+            }
+            Pickup p = Pickup.CreateAndSpawn(pickupItem, off ?? Room.Get(spawnRoom).Position, rotation ?? Quaternion.Euler(0, 0, 0));
+
+            p.Scale = scale ?? Vector3.one;
+            p.PickupTime = PickupTime;
+
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.useGravity = true;
+            }
+
             if (Plugin.Instance.Config.Debug == true)
                 PluginAPI.Core.Log.Debug("DEBUGGING: ITEM: " + p.Type + " - POS: " + p.Position + " - ROOM: " + p.Room.Type);
             return p;
         }
         
-        public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, Vector3 position, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, Vector3 position, bool HasGravity = true, float PickupTime = 1f, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
 
             p.Scale = scale ?? Vector3.one;
+            p.PickupTime = PickupTime;
 
             if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == false)
             {

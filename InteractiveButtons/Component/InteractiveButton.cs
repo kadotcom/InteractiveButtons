@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exiled.API.Features.Pickups;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,12 @@ using UnityEngine;
 namespace InteractiveButtons.Component;
 public class InteractiveButton : MonoBehaviour
 {
-    public GameObject Button;
-    public bool HasIB;
+    public GameObject ButtonGameObject;
+    public Pickup ButtonPickup;
+
+    public bool IsUsingTextID;
+    
     public int ID;
+    public string TextID;
+
 }

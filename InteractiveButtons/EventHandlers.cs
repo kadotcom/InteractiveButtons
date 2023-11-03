@@ -13,6 +13,11 @@ namespace InteractiveButtons
     public class EventHandlers
     {
         public ButtonInteractedEventArgs buttonInteracting;
+        public void OnRoundRestarting()
+        {
+            API.API.ClearAllButtons();
+        }
+
         public void OnInteracting(PickingUpItemEventArgs e)
         {
             if (e.Pickup == null)
