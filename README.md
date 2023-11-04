@@ -2,7 +2,7 @@
 An EXILED plugin API that adds buttons by using items.
 
 # Installation
-1. Open the [Latest Releases](https://github.com/kadotcom/InteractiveButtons/releases/latest) tab.
+1. Open the [Latest Releases](https://github.com/InteractDev/InteractiveButtons/releases/latest) tab.
 2. Install the latest 'InteractiveButtons.dll' file.
 3. Once it installs, put the InteractiveButtons.dll file in the ```EXILED/Plugins``` folder
 4. Either start up your server if the server is offline, or restart your server if the server is online.
