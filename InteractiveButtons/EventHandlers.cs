@@ -17,7 +17,7 @@ namespace InteractiveButtons
         {
             API.API.ClearAllButtons();
         }
-
+        
         public void OnInteracting(PickingUpItemEventArgs e)
         {
             if (e.Pickup == null)
