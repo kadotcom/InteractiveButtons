@@ -7,7 +7,15 @@ An EXILED plugin API that adds buttons by using items.
 3. Once it installs, put the InteractiveButtons.dll file in the ```EXILED/Plugins``` folder
 4. Either start up your server if the server is offline, or restart your server if the server is online.
 5. Start using the InteractiveButtons API.
-   
+
+# Getting Started
+When you create a project using InteractiveButtons, make sure you import it into the project, to figure out how to import Packages, follow one of these tutorials depending on your editor. 
+
+[IntelliJ Rider](https://www.jetbrains.com/help/rider/Extending_Your_Solution.html#project_assembly_references)\
+[Visual Studio](https://learn.microsoft.com/en-us/visualstudio/ide/how-to-add-or-remove-references-by-using-the-reference-manager?view=vs-2022)
+
+After you are able to open the reference window, find where you installed the InteractiveButtons dll and import it into the project. If you need an example on how to use the InteractiveButtons API, either view the API examples, or check out the [example plugin](https://github.com/InteractDev/ExamplePlugin-InteractiveButtons).
+
 # API - Functions
 The InteractiveButtons plugin is an API to add buttons into SCP:SL by using items, and because of that, it has some functions needed to do certain things.
 
