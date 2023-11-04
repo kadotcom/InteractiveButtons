@@ -42,7 +42,7 @@ namespace InteractiveButtons.Commands
             }
             else
             {
-                response = "World!";
+                response = "You must be a player to use this.";
                 return true;
             }
         }

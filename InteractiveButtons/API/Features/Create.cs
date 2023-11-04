@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Pickups;
+using Exiled.API.Features.Toys;
 using InteractiveButtons.Component;
 using System;
 using System.Collections.Generic;
@@ -221,7 +222,24 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
+        public static Primitive CreatePrimitiveButton(int Id, PrimitiveType primitiveType, RoomType roomType, Vector3? offset, Vector3? rotation, Vector3? scale)
+        {
+            Vector3? off = null;
+            if(offset != null)
+            {
+                off = new Vector3(Room.Get(roomType).Position.x + offset.Value.x, Room.Get(roomType).Position.y + offset.Value.y, Room.Get(roomType).Position.z + offset.Value.z);
+            }
 
+            Primitive p = Primitive.Create(off ?? Room.Get(roomType).Position, rotation ?? Vector3.zero, scale ?? Vector3.one, true);
+            PrimitiveButton pb = p.Base.gameObject.AddComponent<PrimitiveButton>();
+
+            pb.IsUsingTextID = false;
+            pb.ID = Id;
+            pb.ButtonGameObject = pb.gameObject;
+            pb.ButtonPrimitive = p;
+
+            return p;
+        }
         public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, bool HasGravity = true, float PickupTime = 1f, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;

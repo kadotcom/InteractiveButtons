@@ -370,6 +370,7 @@
     <Compile Include="API\Features\Create.cs" />
     <Compile Include="Commands\TestButton.cs" />
     <Compile Include="Component\InteractiveButton.cs" />
+    <Compile Include="Component\PrimitiveButton.cs" />
     <Compile Include="EventHandlers.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Config.cs" />
