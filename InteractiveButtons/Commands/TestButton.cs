@@ -19,17 +19,26 @@ namespace InteractiveButtons.Commands
         {
             if (sender is PlayerCommandSender player)
             {
-                Pickup p = API.Features.Create.CreateInteractiveButton(ItemType.SCP207, Exiled.API.Enums.RoomType.EzGateA, "Hello!", 15f, false,new Vector3(0, 2, 0), new Vector3(1, 1, 1), Quaternion.Euler(0, 0, 0));
-                if(p != null)
+                if(Plugin.Instance.Config.HaveTestCommand)
                 {
-                    response = $"{p.Info.ItemId} has spawned at {p.Transform.localPosition} in room {p.Room.Type}";
-                    return false;
+                    Pickup p = API.Features.Create.CreateInteractiveButton(ItemType.SCP207, Exiled.API.Enums.RoomType.EzGateA, "Hello!", 15f, false, new Vector3(0, 2, 0), new Vector3(1, 1, 1), Quaternion.Euler(0, 0, 0));
+                    if (p != null)
+                    {
+                        response = $"{p.Info.ItemId} has spawned at {p.Transform.localPosition} in room {p.Room.Type}";
+                        return false;
+                    }
+                    else
+                    {
+                        response = $"Pickup failed to spawn.";
+                        return false;
+                    }
                 }
                 else
                 {
-                    response = $"Pickup failed to spawn.";
+                    response = $"The HaveTestCommand config option is disabled.";
                     return false;
                 }
+
             }
             else
             {
