@@ -74,9 +74,6 @@ namespace InteractiveButtons.API.Features
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
-
-            Collider c = p.GameObject.AddComponent<Collider>();
-            c.enabled = true;
             
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
@@ -148,8 +145,6 @@ namespace InteractiveButtons.API.Features
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
-
-            Collider c = p.GameObject.AddComponent<Collider>();
 
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
@@ -225,10 +220,7 @@ namespace InteractiveButtons.API.Features
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
-
             p.PickupTime = PickupTime;
-
-            Collider c = p.GameObject.AddComponent<Collider>();
 
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
@@ -298,10 +290,7 @@ namespace InteractiveButtons.API.Features
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
-
             p.PickupTime = PickupTime;
-
-            Collider c = p.GameObject.AddComponent<Collider>();
 
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
