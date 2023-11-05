@@ -35,8 +35,8 @@ You can also see when a button is created by using the ```API.Events.EventArgs.B
 
 ```csharp
 public void OnRoundStart(){
-  // CreateInteractiveButton(PickupItemType, SpawnRoom, ButtonId, ItemPickupTime = 1f, PickupHasGravity = true, ItemSpawnOffset = Vector3.zero, ItemScale = Vector3.one, ItemRotation = Quaternion.Euler(0, 0, 0))
-  InteractiveButtons.API.Features.Create.CreateInteractiveButton(ItemType.SCP207, RoomType.EzGateA, 1, 1f, true, new Vector3(0, 2, 0), new Vector3(2, 2, 2), Quaternion.Euler(0, 0, 0));
+  // CreateInteractiveButton(PickupItemType, SpawnRoom, ButtonId, ItemPickupTime = 1f, PickupHasGravity = true, PickupCanCollideWithOtherItems = true, ItemSpawnOffset = Vector3.zero, ItemScale = Vector3.one, ItemRotation = Quaternion.Euler(0, 0, 0))
+  InteractiveButtons.API.Features.Create.CreateInteractiveButton(ItemType.SCP207, RoomType.EzGateA, 1, 1f, true, true, new Vector3(0, 2, 0), new Vector3(2, 2, 2), Quaternion.Euler(0, 0, 0));
 }
 ```
 
