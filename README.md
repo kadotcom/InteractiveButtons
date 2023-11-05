@@ -1,5 +1,4 @@
-# InteractiveButtons
-An EXILED plugin API that adds buttons by using items.
+[<img src="https://github.com/kadotcom/image/blob/main/InteractiveButtonsBanner.png">](https://github.com/InteractDev/InteractiveButtons)
 
 # Installation
 1. Open the [Latest Releases](https://github.com/InteractDev/InteractiveButtons/releases/latest) tab.
