@@ -30,16 +30,6 @@ namespace InteractiveButtons.API.Features
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
                 rg.useGravity = false;
-            }else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = true;
-            }
-
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = false;
             }
             else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
             {
@@ -47,27 +37,15 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-
             if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
+                rg.isKinematic = false;
             }
             else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
-            }
-
-            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
+                rg.isKinematic = true;
             }
 
 
@@ -109,37 +87,15 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = true;
-            }
-
             if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
+                rg.isKinematic = false;
             }
             else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
-            }
-
-            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
+                rg.isKinematic = true;
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
@@ -186,37 +142,15 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = true;
-            }
-
             if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
+                rg.isKinematic = false;
             }
             else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
-            }
-
-            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
+                rg.isKinematic = true;
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
@@ -238,7 +172,7 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
-
+        
         public static Pickup CreateInteractiveButton(ItemType pickupItem, string Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, bool HasObjectCollision = true, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
@@ -256,37 +190,15 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.useGravity = true;
-            }
-
             if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
+                rg.isKinematic = false;
             }
             else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
-            }
-
-            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = false;
-            }
-            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
-            {
-                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
-                rg.detectCollisions = true;
+                rg.isKinematic = true;
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
@@ -319,7 +231,7 @@ namespace InteractiveButtons.API.Features
             }
 
             Primitive p = Primitive.Create(off ?? Room.Get(roomType).Position, rotation ?? Vector3.zero, scale ?? Vector3.one, true);
-            PrimitiveButton pb = p.Base.gameObject.AddComponent<PrimitiveButton>();
+            PrimitiveButton pb = p.GameObject.gameObject.AddComponent<PrimitiveButton>();
 
             pb.IsUsingTextID = false;
             pb.ID = Id;
@@ -354,7 +266,7 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
                 rg.useGravity = false;
@@ -388,7 +300,7 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            if (p.Base.GetComponent<Rigidbody>() != null && HasGravity == false)
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasGravity == false)
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
                 rg.useGravity = false;
