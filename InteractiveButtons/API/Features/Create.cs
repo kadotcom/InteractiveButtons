@@ -53,6 +53,8 @@ namespace InteractiveButtons.API.Features
 
             p.PickupTime = PickupTime;
 
+            Collider c = p.GameObject.AddComponent<Collider>();
+
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
@@ -101,6 +103,8 @@ namespace InteractiveButtons.API.Features
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
+
+            Collider c = p.GameObject.AddComponent<Collider>();
 
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
@@ -157,6 +161,8 @@ namespace InteractiveButtons.API.Features
 
             p.PickupTime = PickupTime;
 
+            Collider c = p.GameObject.AddComponent<Collider>();
+
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
@@ -206,6 +212,8 @@ namespace InteractiveButtons.API.Features
 
             p.PickupTime = PickupTime;
 
+            Collider c = p.GameObject.AddComponent<Collider>();
+
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
@@ -222,6 +230,7 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
+        
         /*
          public static Primitive CreatePrimitiveButton(int Id, PrimitiveType primitiveType, RoomType roomType, Vector3? offset, Vector3? rotation, Vector3? scale)
         {
@@ -242,6 +251,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
         */
+
         public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, bool HasGravity = true, float PickupTime = 1f, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
