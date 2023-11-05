@@ -14,7 +14,7 @@ namespace InteractiveButtons.API.Features
 {
     public class Create
     {
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, int Id, float PickupTime = 1f, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, int Id, float PickupTime = 1f, bool HasGravity = true, bool HasObjectCollision = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
             if(offset != null)
@@ -47,14 +47,37 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
-            
+
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
 
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
 
             Collider c = p.GameObject.AddComponent<Collider>();
-
+            c.enabled = true;
+            
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
@@ -72,7 +95,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
 
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, int Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, int Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, bool HasObjectCollision = true, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
 
@@ -100,6 +123,28 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
@@ -123,7 +168,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
 
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, string Id, float PickupTime = 1f, bool HasGravity = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, RoomType spawnRoom, string Id, float PickupTime = 1f, bool HasGravity = true, bool HasObjectCollision = true, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
             if (offset != null)
@@ -157,6 +202,28 @@ namespace InteractiveButtons.API.Features
                 rg.useGravity = true;
             }
 
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
@@ -180,7 +247,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
 
-        public static Pickup CreateInteractiveButton(ItemType pickupItem, string Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreateInteractiveButton(ItemType pickupItem, string Id, Vector3 position, float PickupTime = 1f, bool HasGravity = true, bool HasObjectCollision = true, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
 
@@ -206,6 +273,28 @@ namespace InteractiveButtons.API.Features
             {
                 Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
                 rg.useGravity = true;
+            }
+
+            if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
+            }
+
+            if (p.Base.GetComponent<Rigidbody>() != null && HasObjectCollision == false)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = false;
+            }
+            else if (p.GameObject.GetComponent<Rigidbody>() != null && HasObjectCollision == true)
+            {
+                Rigidbody rg = p.GameObject.GetComponent<Rigidbody>();
+                rg.detectCollisions = true;
             }
 
             p.GameObject.AddComponent<InteractiveButton>();
