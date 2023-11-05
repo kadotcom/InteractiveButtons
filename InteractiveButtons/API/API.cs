@@ -19,12 +19,22 @@ namespace InteractiveButtons.API
         
         public static void Destroy()
         {
-            ExistingButtons.Clear();
-            ExistingButtons = null;
+            if (ExistingButtons != null)
+            {
+                ExistingButtons.Clear();
+                ExistingButtons = null;
+            }
         }
         public static void ClearAllButtons()
         {
-            ExistingButtons.Clear();
+            if (ExistingButtons != null)
+            {
+                ExistingButtons.Clear();
+            }
+            else
+            {
+                PluginAPI.Core.Log.Debug("There was an issue clearing all buttons, ExistingButtons is null.");
+            }
         }
 
         public API() { }

@@ -15,7 +15,15 @@ namespace InteractiveButtons
         public ButtonInteractedEventArgs buttonInteracting;
         public void OnRoundRestarting()
         {
-            API.API.ClearAllButtons();
+            if (!Plugin.Instance.Config.InitApiUsingExternalPlugin)
+            {
+                API.API.ClearAllButtons();
+            }
+            else
+            {
+                API.API.ClearAllButtons();
+                PluginAPI.Core.Log.Debug("Despite InitApiUsingExternalPlugin being set to true. We still need to clear all buttons on round restart. If ExistingButtons haven't been initiated, you should see a message about it.");
+            }
         }
 
         public void OnInteracting(PickingUpItemEventArgs e)
