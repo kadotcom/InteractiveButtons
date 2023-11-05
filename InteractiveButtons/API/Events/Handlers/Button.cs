@@ -20,9 +20,9 @@ namespace InteractiveButtons.API.Events.Handlers
 
         internal static void OnButtonCreated(ButtonCreatedEventArgs ev) => ButtonCreated.InvokeSafely(ev);
 
-        public static Event<PrimitiveButtonInteractedEventArgs> PrimitiveButtonCreated { get; set; } = new();
+        //public static Event<PrimitiveButtonInteractedEventArgs> PrimitiveButtonCreated { get; set; } = new();
 
-        internal static void OnPrimitiveButtonCreated(PrimitiveButtonInteractedEventArgs ev) => PrimitiveButtonCreated.InvokeSafely(ev);
+        //internal static void OnPrimitiveButtonCreated(PrimitiveButtonInteractedEventArgs ev) => PrimitiveButtonCreated.InvokeSafely(ev);
 
     }
 }

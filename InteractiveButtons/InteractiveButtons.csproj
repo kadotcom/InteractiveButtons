@@ -365,6 +365,7 @@
   <ItemGroup>
     <Compile Include="API\API.cs" />
     <Compile Include="API\Events\EventArgs\ButtonCreatedEventArgs.cs" />
+    <Compile Include="API\Events\EventArgs\PrimitiveButtonInteractedEventArgs.cs" />
     <Compile Include="API\Events\EventArgs\ButtonInteractedEventArgs.cs" />
     <Compile Include="API\Events\Handlers\Button.cs" />
     <Compile Include="API\Features\Create.cs" />
