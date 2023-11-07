@@ -2,6 +2,7 @@
 using Exiled.API.Features;
 using Exiled.API.Features.Pickups;
 using Exiled.API.Features.Toys;
+using Exiled.CustomItems.API.Features;
 using InteractiveButtons.Component;
 using System;
 using System.Collections.Generic;
@@ -220,7 +221,21 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
-        
+
+        #nullable enable
+        public static CustomItem? CreateCustomItemPickup(uint customItemId)
+        {
+            CustomItem? t = CustomItem.Get(customItemId);
+
+            if(t == null)
+            {
+                return t;
+            }
+           
+            return null;
+        }
+
+
         /*
          public static Primitive CreatePrimitiveButton(int Id, PrimitiveType primitiveType, RoomType roomType, Vector3? offset, Vector3? rotation, Vector3? scale)
         {
