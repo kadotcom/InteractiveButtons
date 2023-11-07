@@ -223,12 +223,21 @@ namespace InteractiveButtons.API.Features
         }
 
         #nullable enable
-        public static CustomItem? CreateCustomItemPickup(uint customItemId)
+        public static CustomItem? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3? offset = null)
         {
             CustomItem? t = CustomItem.Get(customItemId);
 
-            if(t == null)
+            Vector3? off = null;
+
+            if(offset != null)
             {
+                off = new Vector3(Room.Get(spawnRoom).Position.x + offset.Value.x, Room.Get(spawnRoom).Position.y + offset.Value.y, Room.Get(spawnRoom).Position.z + offset.Value.z);
+            }
+
+            if (t != null)
+            {
+                t.Spawn(off ?? Room.Get(spawnRoom).Position);
+                
                 return t;
             }
            
