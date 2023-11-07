@@ -221,8 +221,6 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
-
-        #nullable enable
         public static CustomItem? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3? offset = null)
         {
             CustomItem? t = CustomItem.Get(customItemId);
@@ -243,7 +241,20 @@ namespace InteractiveButtons.API.Features
            
             return null;
         }
+        
+        public static CustomItem? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3 position)
+        {
+            CustomItem? t = CustomItem.Get(customItemId);
 
+            if (t != null)
+            {
+                t.Spawn(position);
+
+                return t;
+            }
+
+            return null;
+        }
 
         /*
          public static Primitive CreatePrimitiveButton(int Id, PrimitiveType primitiveType, RoomType roomType, Vector3? offset, Vector3? rotation, Vector3? scale)
