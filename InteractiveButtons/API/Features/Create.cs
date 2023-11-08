@@ -221,10 +221,8 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
-        public static CustomItem? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3? offset = null)
+        public static Pickup? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3? offset = null)
         {
-            CustomItem? t = CustomItem.Get(customItemId);
-
             Vector3? off = null;
 
             if(offset != null)
@@ -242,18 +240,15 @@ namespace InteractiveButtons.API.Features
             return null;
         }
         
-        public static CustomItem? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3 position)
+        public static Pickup? CreateCustomItemPickup(uint customItemId, Vector3 position)
         {
-            CustomItem? t = CustomItem.Get(customItemId);
+            CustomItem.TrySpawn(customItemId, position, out Pickup? p);
 
-            if (t != null)
-            {
-                t.Spawn(position);
+            if (p == null) return null;
 
-                return t;
-            }
-
-            return null;
+            //p.Scale
+            
+            return p;
         }
 
         /*
