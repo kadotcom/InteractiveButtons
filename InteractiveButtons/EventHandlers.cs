@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Features.Pickups;
 using Exiled.API.Features.Toys;
+using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
 using InteractiveButtons.API.Events.EventArgs;
 using InteractiveButtons.API.Events.Handlers;
@@ -13,6 +14,9 @@ namespace InteractiveButtons
     public class EventHandlers
     {
         public ButtonInteractedEventArgs buttonInteracting;
+        public PickingUpCustomItemEventArgs pickingUpCustomItem;
+        public CustomItemButtonInteractedEventArgs customItemButtonInteracted;
+
         public void OnRoundRestarting()
         {
             if (!Plugin.Instance.Config.InitApiUsingExternalPlugin)
@@ -33,9 +37,22 @@ namespace InteractiveButtons
 
             if (e.Pickup.GameObject.TryGetComponent(out InteractiveButton c))
             {
-                buttonInteracting = new(e.Player, e.Pickup.Base);
-                Button.OnButtonInteracted(buttonInteracting);
+                if(c.IsCustomItemButton)
+                {
+                    customItemButtonInteracted = new(e.Player, e.Pickup.Base, CustomItem.Get(c.CustomItemID));
+                }
+                else
+                {
+                    buttonInteracting = new(e.Player, e.Pickup.Base);
+                    Button.OnButtonInteracted(buttonInteracting);
+                }
                 e.IsAllowed = false;
+            }
+
+            if(CustomItem.TryGet(e.Pickup, out CustomItem ci))
+            {
+                pickingUpCustomItem = new(e.Player,e.Pickup.Base,ci);
+                API.Events.Handlers.Pickup.OnPickingUpCustomItem(pickingUpCustomItem);
             }
         }
     }

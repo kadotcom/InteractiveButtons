@@ -20,7 +20,7 @@ namespace InteractiveButtons
 
         public override string Prefix => Name;
 
-        public override Version Version => new Version(1,2,0);
+        public override Version Version => new Version(1,3,0);
         public override Version RequiredExiledVersion => new Version(8,2,0);
         public static Plugin Instance;
 

@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
+using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Pickups;
 using Exiled.API.Features.Toys;
 using Exiled.CustomItems.API.Features;
@@ -59,7 +60,8 @@ namespace InteractiveButtons.API.Features
             i.ButtonPickup = p;
             i.IsUsingTextID = false;
             i.ID = Id;
-            
+            i.IsCustomItemButton = false;
+
             API.ExistingButtons.Add(i);
             //API.ValidButtons.Add(p);
 
@@ -108,6 +110,8 @@ namespace InteractiveButtons.API.Features
             i.ButtonPickup = p;
             i.IsUsingTextID = false;
             i.ID = Id;
+            i.IsCustomItemButton = false;
+
             API.ExistingButtons.Add(i);
 
             //API.ValidButtons.Add(p);
@@ -162,6 +166,8 @@ namespace InteractiveButtons.API.Features
             i.ButtonPickup = p;
             i.IsUsingTextID = true;
             i.TextID = Id;
+            i.IsCustomItemButton = false;
+
             API.ExistingButtons.Add(i);
 
             //API.ValidButtons.Add(p);
@@ -210,6 +216,8 @@ namespace InteractiveButtons.API.Features
             i.ButtonPickup = p;
             i.IsUsingTextID = true;
             i.TextID = Id;
+            i.IsCustomItemButton = false;
+
             API.ExistingButtons.Add(i);
 
             //API.ValidButtons.Add(p);
@@ -221,33 +229,113 @@ namespace InteractiveButtons.API.Features
             Events.Handlers.Button.OnButtonCreated(ev);
             return p;
         }
-        public static Pickup? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, Vector3? offset = null)
+
+        public static Pickup? CreateCustomItemButton(uint customItemId, RoomType spawnRoom, float pickUpTime = 1f, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
         {
             Vector3? off = null;
-
-            if(offset != null)
+            if (offset != null)
             {
                 off = new Vector3(Room.Get(spawnRoom).Position.x + offset.Value.x, Room.Get(spawnRoom).Position.y + offset.Value.y, Room.Get(spawnRoom).Position.z + offset.Value.z);
             }
 
-            if (t != null)
+            CustomItem.TrySpawn(customItemId, off ?? Room.Get(spawnRoom).Position, out Pickup? p);
+
+            if (p == null)
             {
-                t.Spawn(off ?? Room.Get(spawnRoom).Position);
-                
-                return t;
+                if (Plugin.Instance.Config.Debug)
+                {
+                    PluginAPI.Core.Log.Debug($"The CustomItem with the ID {customItemId} does not exist.");
+                }
+                return null;
             }
-           
-            return null;
+
+            p.Scale = scale ?? Vector3.one;
+            p.Rotation = rotation ?? Quaternion.Euler(0, 0, 0);
+            p.PickupTime = pickUpTime;
+
+            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsCustomItemButton = true;
+            i.CustomItemID = customItemId;
+            API.ExistingButtons.Add(i);
+
+            if (Plugin.Instance.Config.Debug == true)
+                PluginAPI.Core.Log.Debug("DEBUGGING: CUSTOM ITEM: " + CustomItem.Get(customItemId).Name + " - POS: " + p.Position + " - ROOM: " + p.Room.Type + " - Custom Button ID: " + i.CustomItemID);
+
+            return p;
         }
-        
-        public static Pickup? CreateCustomItemPickup(uint customItemId, Vector3 position)
+
+        public static Pickup? CreateCustomItemButton(uint customItemId, Vector3 position, float pickUpTime = 1f, Vector3? scale = null, Quaternion? rotation = null)
         {
             CustomItem.TrySpawn(customItemId, position, out Pickup? p);
 
-            if (p == null) return null;
+            if (p == null)
+            {
+                if (Plugin.Instance.Config.Debug)
+                {
+                    PluginAPI.Core.Log.Debug($"The CustomItem with the ID {customItemId} does not exist.");
+                }
+                return null;
+            }
 
-            //p.Scale
-            
+            p.Scale = scale ?? Vector3.one;
+            p.Rotation = rotation ?? Quaternion.Euler(0, 0, 0);
+            p.PickupTime = pickUpTime;
+
+            InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
+            i.ButtonGameObject = p.GameObject;
+            i.ButtonPickup = p;
+            i.IsCustomItemButton = true;
+            i.CustomItemID = customItemId;
+            API.ExistingButtons.Add(i);
+
+            if (Plugin.Instance.Config.Debug == true)
+                PluginAPI.Core.Log.Debug("DEBUGGING: CUSTOM ITEM: " + CustomItem.Get(customItemId).Name + " - POS: " + p.Position + " - ROOM: " + p.Room.Type + " - Custom Button ID: " + i.CustomItemID);
+
+            return p;
+        }
+
+        public static Pickup? CreateCustomItemPickup(uint customItemId, RoomType spawnRoom, float pickUpTime = 1f, Vector3? offset = null, Vector3? scale = null, Quaternion? rotation = null)
+        {
+            Vector3? off = null;
+            if (offset != null)
+            {
+                off = new Vector3(Room.Get(spawnRoom).Position.x + offset.Value.x, Room.Get(spawnRoom).Position.y + offset.Value.y, Room.Get(spawnRoom).Position.z + offset.Value.z);
+            }
+
+            CustomItem.TrySpawn(customItemId, off ?? Room.Get(spawnRoom).Position, out Pickup? p);
+
+            if (p == null)
+            {
+                if (Plugin.Instance.Config.Debug)
+                {
+                    PluginAPI.Core.Log.Debug($"CustomItem with an ID of {customItemId} does not exist.");
+                }
+                return null;
+            }
+
+            p.Scale = scale ?? Vector3.one;
+            p.Rotation = rotation ?? Quaternion.Euler(0, 0, 0);
+            p.PickupTime = pickUpTime;
+            return p;
+        }
+
+        public static Pickup? CreateCustomItemPickup(uint customItemId, Vector3 position, float pickUpTime = 1f, Vector3? scale = null, Quaternion? rotation = null)
+        {
+            CustomItem.TrySpawn(customItemId, position, out Pickup? p);
+
+            if (p == null) {
+                if (Plugin.Instance.Config.Debug)
+                {
+                    PluginAPI.Core.Log.Debug($"The CustomItem with the ID {customItemId} does not exist.");
+                }
+                return null;
+            }
+
+            p.Scale = scale ?? Vector3.one;
+            p.Rotation = rotation ?? Quaternion.Euler(0,0,0);
+            p.PickupTime = pickUpTime;
             return p;
         }
 
@@ -312,7 +400,7 @@ namespace InteractiveButtons.API.Features
             return p;
         }
         
-        public static Pickup CreatePickup(ItemType pickupItem, RoomType spawnRoom, Vector3 position, bool HasGravity = true, float PickupTime = 1f, Vector3? scale = null, Quaternion? rotation = null)
+        public static Pickup CreatePickup(ItemType pickupItem, Vector3 position, bool HasGravity = true, float PickupTime = 1f, Vector3? scale = null, Quaternion? rotation = null)
         {
             Pickup p = Pickup.CreateAndSpawn(pickupItem, position, rotation ?? Quaternion.Euler(0, 0, 0));
 

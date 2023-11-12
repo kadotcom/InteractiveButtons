@@ -1,4 +1,5 @@
 ﻿using Exiled.API.Features.Pickups;
+using Exiled.CustomItems.API.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,4 +18,9 @@ public class InteractiveButton : MonoBehaviour
     public int ID;
     public string TextID;
 
+
+    /// Only for CustomItemButtons
+    public CustomItem ButtonCustomItem;
+    public uint CustomItemID;
+    public bool IsCustomItemButton;
 }
