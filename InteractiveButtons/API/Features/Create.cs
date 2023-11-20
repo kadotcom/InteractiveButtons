@@ -445,7 +445,7 @@ namespace InteractiveButtons.API.Features
             }
 
             Scp330 scp = (Scp330)Item.Create(ItemType.SCP330);
-            
+            scp.RemoveAllCandy();
             foreach(CandyKindID ckid in candy)
             {
                 scp.AddCandy(ckid);
@@ -459,7 +459,7 @@ namespace InteractiveButtons.API.Features
         public static Scp330 Create330Pickup(List<CandyKindID> candy, Vector3 position, Quaternion? rotation = null)
         {
             Scp330 scp = (Scp330)Item.Create(ItemType.SCP330);
-            
+            scp.RemoveAllCandy();
             foreach (CandyKindID ckid in candy)
             {
                 scp.AddCandy(ckid);
