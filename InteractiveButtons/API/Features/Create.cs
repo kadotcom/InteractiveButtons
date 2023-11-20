@@ -1,10 +1,12 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Attributes;
+using Exiled.API.Features.Items;
 using Exiled.API.Features.Pickups;
 using Exiled.API.Features.Toys;
 using Exiled.CustomItems.API.Features;
 using InteractiveButtons.Component;
+using InventorySystem.Items.Usables.Scp330;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -432,6 +434,40 @@ namespace InteractiveButtons.API.Features
             if (Plugin.Instance.Config.Debug == true)
                 PluginAPI.Core.Log.Debug("DEBUGGING: ITEM: " + p.Type + " - POS: " + p.Position + " - ROOM: " + p.Room.Type);
             return p;
+        }
+        
+        public static Scp330 Create330Pickup(List<CandyKindID> candy, RoomType spawnRoom, Quaternion? rotation = null, Vector3? offset = null)
+        {
+            Vector3? off = null;
+            if (offset != null)
+            {
+                off = new Vector3(Room.Get(spawnRoom).Position.x + offset.Value.x, Room.Get(spawnRoom).Position.y + offset.Value.y, Room.Get(spawnRoom).Position.z + offset.Value.z);
+            }
+
+            Scp330 scp = (Scp330)Item.Create(ItemType.SCP330);
+            
+            foreach(CandyKindID ckid in candy)
+            {
+                scp.AddCandy(ckid);
+            }
+
+            scp.CreatePickup(off ?? Room.Get(spawnRoom).Position, rotation ?? default, true);
+
+            return scp;
+        }
+
+        public static Scp330 Create330Pickup(List<CandyKindID> candy, Vector3 position, Quaternion? rotation = null)
+        {
+            Scp330 scp = (Scp330)Item.Create(ItemType.SCP330);
+            
+            foreach (CandyKindID ckid in candy)
+            {
+                scp.AddCandy(ckid);
+            }
+
+            scp.CreatePickup(position, rotation ?? default, true);
+
+            return scp;
         }
     }
 }
