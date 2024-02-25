@@ -13,13 +13,13 @@ namespace InteractiveButtons
 {
     public sealed class Plugin : Plugin<Config>
     {
-        public override string Author => "InteractDev (KadotCom)";
+        public override string Author => "KadotCom";
 
         public override string Name => "InteractiveButtons";
 
         public override string Prefix => Name;
 
-        public override Version Version => new Version(1,3,0);
+        public override Version Version => new Version(1,4,0);
         public override Version RequiredExiledVersion => new Version(8,4,0);
         public static Plugin Instance;
 
