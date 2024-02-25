@@ -6,7 +6,6 @@ using Exiled.Events.EventArgs.Player;
 using InteractiveButtons.API.Events.EventArgs;
 using InteractiveButtons.API.Events.Handlers;
 using InteractiveButtons.Component;
-using MEC;
 using UnityEngine;
 
 namespace InteractiveButtons
