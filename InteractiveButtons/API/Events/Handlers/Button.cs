@@ -16,10 +16,6 @@ namespace InteractiveButtons.API.Events.Handlers
 
         internal static void OnButtonInteracted(ButtonInteractedEventArgs ev) => ButtonInteracted.InvokeSafely(ev);
 
-        public static Event<CustomItemButtonInteractedEventArgs> CustomItemButtonInteracted { get; set; } = new();
-
-        internal static void OnCustomItemButtonInteracted(CustomItemButtonInteractedEventArgs ev) => CustomItemButtonInteracted.InvokeSafely(ev);
-
         public static Event<ButtonCreatedEventArgs> ButtonCreated { get; set; } = new();
 
         internal static void OnButtonCreated(ButtonCreatedEventArgs ev) => ButtonCreated.InvokeSafely(ev);

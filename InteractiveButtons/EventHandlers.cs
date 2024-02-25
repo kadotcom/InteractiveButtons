@@ -14,8 +14,6 @@ namespace InteractiveButtons
     public class EventHandlers
     {
         public ButtonInteractedEventArgs buttonInteracting;
-        public PickingUpCustomItemEventArgs pickingUpCustomItem;
-        public CustomItemButtonInteractedEventArgs customItemButtonInteracted;
 
         public void OnRoundRestarting()
         {
@@ -37,22 +35,11 @@ namespace InteractiveButtons
 
             if (e.Pickup.GameObject.TryGetComponent(out InteractiveButton c))
             {
-                if(c.IsCustomItemButton)
-                {
-                    customItemButtonInteracted = new(e.Player, e.Pickup.Base, CustomItem.Get(c.CustomItemID));
-                }
-                else
-                {
-                    buttonInteracting = new(e.Player, e.Pickup.Base);
-                    Button.OnButtonInteracted(buttonInteracting);
-                }
-                e.IsAllowed = false;
-            }
 
-            if(CustomItem.TryGet(e.Pickup, out CustomItem ci))
-            {
-                pickingUpCustomItem = new(e.Player,e.Pickup.Base,ci);
-                API.Events.Handlers.Pickup.OnPickingUpCustomItem(pickingUpCustomItem);
+                buttonInteracting = new(e.Player, e.Pickup.Base);
+                Button.OnButtonInteracted(buttonInteracting);
+                
+                e.IsAllowed = false;
             }
         }
     }
