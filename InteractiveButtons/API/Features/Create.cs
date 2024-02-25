@@ -56,7 +56,8 @@ namespace InteractiveButtons.API.Features
             p.GameObject.AddComponent<InteractiveButton>();
 
             p.PickupTime = PickupTime;
-            
+
+            #nullable enable
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
@@ -106,6 +107,7 @@ namespace InteractiveButtons.API.Features
 
             p.PickupTime = PickupTime;
 
+            #nullable enable
             InteractiveButton? i = p.GameObject.GetComponent<InteractiveButton>();
             i.ButtonGameObject = p.GameObject;
             i.ButtonPickup = p;
